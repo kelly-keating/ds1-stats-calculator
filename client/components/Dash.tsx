@@ -1,6 +1,7 @@
 import { Link, Outlet } from 'react-router-dom'
 
 import Vinyls from './Vinyls'
+import NewVinyl from './NewVinyl'
 
 function Dash() {
   return (
@@ -17,6 +18,7 @@ function Dash() {
       <Outlet />
 
       <Vinyls />
+      <NewVinyl />
     </>
   )
 }

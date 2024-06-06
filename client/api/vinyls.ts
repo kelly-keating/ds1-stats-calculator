@@ -4,11 +4,25 @@ import { Vinyl } from '../../models'
 export const vinylApi = createApi({
   reducerPath: 'vinylApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api/v1/' }),
+  tagTypes: ['Vinyls'],
   endpoints: (builder) => ({
     getVinyls: builder.query<Vinyl[], void>({
-      query: () => 'vinyls'
-    })
+      query: () => 'vinyls',
+      providesTags: ['Vinyls'],
+    }),
+
+    createVinyl: builder.mutation<Vinyl, Omit<Vinyl, 'id'>>({
+      query: ({ artist, title, image }) => ({
+        url: 'vinyls',
+        method: 'POST',
+        body: { artist, title, image },
+      }),
+      invalidatesTags: ['Vinyls'],
+    }),
   })
 })
 
-export const { useGetVinylsQuery } = vinylApi
+export const {
+  useGetVinylsQuery,
+  useCreateVinylMutation,
+} = vinylApi
