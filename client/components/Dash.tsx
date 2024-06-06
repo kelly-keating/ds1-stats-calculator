@@ -1,5 +1,7 @@
 import { Link, Outlet } from 'react-router-dom'
 
+import Vinyls from './Vinyls'
+
 function Dash() {
   return (
     <>
@@ -13,6 +15,8 @@ function Dash() {
       </header>
 
       <Outlet />
+
+      <Vinyls />
     </>
   )
 }

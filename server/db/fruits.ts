@@ -1,4 +1,4 @@
-import { Fruit } from '../../models/fruits'
+import { Fruit } from '../../models'
 
 import db from './connection'
 

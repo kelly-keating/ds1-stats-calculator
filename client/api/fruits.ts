@@ -1,5 +1,5 @@
 import request from 'superagent'
-import { Fruit } from '../../models/fruits'
+import { Fruit } from '../../models'
 
 export function getFruits(): Promise<Fruit[]> {
   return request.get('/api/v1/fruits')

@@ -2,6 +2,7 @@ import express from 'express'
 import path from 'path'
 
 import fruits from './routes/fruits'
+import vinyls from './routes/vinyls'
 
 const server = express()
 
@@ -11,6 +12,7 @@ server.use(express.static(path.join(__dirname, 'public')))
 // Routes
 
 server.use('/api/v1/fruits', fruits)
+server.use('/api/v1/vinyls', vinyls)
 
 // Production settings
 

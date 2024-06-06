@@ -1,4 +1,4 @@
-import { Fruit } from '../../models/fruits'
+import { Fruit } from '../../models'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
