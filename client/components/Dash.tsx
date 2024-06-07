@@ -1,27 +1,27 @@
-import { Box, Flex, Heading, Link } from '@chakra-ui/react'
-import { Link as RouterLink, Outlet } from 'react-router-dom'
+import { Box, Button, Flex, Heading } from '@chakra-ui/react'
+import { useState } from 'react'
 
-import Vinyls from './Vinyls'
 import EditModal from "./EditModal"
+import NewVinyl from './NewVinyl'
+import Vinyls from './Vinyls'
 
 function Dash() {
+  const [showAdd, setShowAdd] = useState(false)
+  const toggleShowAdd = () => setShowAdd(show => !show)
+
   return (
     <>
-    
       <Flex as="header" align="center" justify="space-between"
         position="fixed" top="0" left="0" w="100vw" padding="20px"
       >
         <Heading>Vinyls</Heading>
-        <nav>
-          <Link as={RouterLink} to="/">Home</Link>
-          {' | '}
-          <Link as={RouterLink} to="/add">Add a new album</Link>
-        </nav>
+        {!showAdd && <Button onClick={toggleShowAdd}>Add New Album</Button>}
       </Flex>
 
+      <EditModal />
+
       <Box mt="60px">
-        <Outlet />
-        <EditModal />
+        {showAdd && <NewVinyl close={toggleShowAdd} />}
         <Vinyls />
       </Box>
     </>

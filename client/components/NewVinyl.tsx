@@ -1,8 +1,23 @@
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Heading,
+  Image,
+  Input,
+  InputGroup,
+  InputRightElement,
+} from "@chakra-ui/react"
 import { ChangeEvent, FormEvent, useState } from "react"
-import { useCreateVinylMutation } from "../api/vinyls"
-import { Divider } from "@chakra-ui/react"
 
-function NewVinyl() {
+import { useCreateVinylMutation } from "../api/vinyls"
+
+interface Props {
+  close: () => void
+}
+
+function NewVinyl({ close }: Props) {
   const [createAlbum, { isLoading }] = useCreateVinylMutation()
   const [newAlbumData, setNewAlbumData] = useState({
     artist: '',
@@ -27,28 +42,42 @@ function NewVinyl() {
     })
   }
 
+  const allEntered = Boolean(newAlbumData.artist && newAlbumData.title && newAlbumData.image)
+
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>New Album</h3>
-      <div>
-        <label htmlFor='artist'>Artist:</label>{' '}
-        <input type='text' id='artist' onChange={handleUpdate} value={newAlbumData.artist} />
-      </div>
+    <Box as='form' onSubmit={handleSubmit} display='flex' justifyContent='center' mb='20px'>
+      <Box w='sm'>
+        <Heading as='h3' size='md'>New Album</Heading>
 
-      <div>
-        <label htmlFor='title'>Title:</label>{' '}
-        <input type='text' id='title' onChange={handleUpdate} value={newAlbumData.title} />
-      </div>
+        <FormControl display='flex' justifyContent='space-between' alignContent='end' w='100%' m='5px 0'>
+          <FormLabel mt='10px'>Artist:</FormLabel>
+          <Input type='text' id='artist' w='calc(100% - 100px)' onChange={handleUpdate} value={newAlbumData.artist} />
+        </FormControl>
 
-      <div>
-        <label htmlFor='image'>Image URL:</label>{' '}
-        <input type='text' id='image' onChange={handleUpdate} value={newAlbumData.image} />
-      </div>
+        <FormControl display='flex' justifyContent='space-between' alignContent='end' w='100%' m='5px 0'>
+          <FormLabel mt='10px'>Title:</FormLabel>
+          <Input type='text' id='title' w='calc(100% - 100px)' onChange={handleUpdate} value={newAlbumData.title} />
+        </FormControl>
 
-      <div>
-        <input type='submit' value='Add New Album' disabled={isLoading} />
-      </div>
-    </form>
+        <FormControl display='flex' justifyContent='space-between' alignContent='end' w='100%' m='5px 0'>
+          <FormLabel mt='10px'>Image URL:</FormLabel>
+          <Box  w='calc(100% - 100px)'>
+            <InputGroup>
+              <Input type='text' id='image' w='calc(100% - 40px)' onChange={handleUpdate} value={newAlbumData.image} />
+              <InputRightElement>
+              <Image src={newAlbumData.image ? newAlbumData.image : 'https://cdn3.iconfinder.com/data/icons/webdesigncreative/free_icons_64x64_png/Question-mark.png'} alt='image preview'  w='40px' h='40px' backgroundColor='lightgray' />
+              {/* TODO: on invalid image, display alt for alt */}
+              </InputRightElement>
+            </InputGroup>
+          </Box>
+        </FormControl>
+      
+        <Box mt='30px' display='flex' justifyContent='space-between'>
+          <Button onClick={close}>Cancel</Button>
+          <Button type='submit' isDisabled={!allEntered} isLoading={isLoading} loadingText='Saving Album' colorScheme='blue'>Add New Album</Button>
+        </Box>
+      </Box>
+    </Box>
   )
 }
 

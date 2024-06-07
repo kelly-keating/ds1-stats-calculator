@@ -10,9 +10,9 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { EditIcon } from '@chakra-ui/icons'
+import { useDispatch } from 'react-redux'
 
 import { openModal } from '../store/modalSlice'
-import { useDispatch } from 'react-redux'
 
 interface Props {
   id: number

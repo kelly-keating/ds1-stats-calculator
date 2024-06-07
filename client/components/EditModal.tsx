@@ -94,30 +94,31 @@ function EditModal() {
             <FormControl display='flex' alignItems='end' mt='10px'>
               <FormLabel w='105px'>Artist</FormLabel>
               <InputGroup>
-                <Input type='text' id='artist' borderColor={artistUpdated ? 'orange' : 'inherit'} disabled={confirmDelete} defaultValue={albumDetails?.artist} onChange={handleChange} />
+                <Input type='text' id='artist' borderColor={artistUpdated ? 'orange' : 'inherit'} disabled={confirmDelete} value={albumDetails?.artist} onChange={handleChange} />
                 {artistUpdated && <InputRightElement><WarningIcon color='orange' /></InputRightElement>}
               </InputGroup>
             </FormControl>
             <FormControl display='flex' alignItems='end' mt='10px'>
               <FormLabel w='105px'>Title</FormLabel>
               <InputGroup>
-                <Input type='text' id='title' borderColor={titleUpdated ? 'orange' : 'inherit'} disabled={confirmDelete} defaultValue={albumDetails?.title} onChange={handleChange} />
+                <Input type='text' id='title' borderColor={titleUpdated ? 'orange' : 'inherit'} disabled={confirmDelete} value={albumDetails?.title} onChange={handleChange} />
                 {titleUpdated && <InputRightElement><WarningIcon color='orange' /></InputRightElement>}
               </InputGroup>
            </FormControl>
             <FormControl display='flex' alignItems='end' mt='10px'>
               <FormLabel w='105px'>Image URL</FormLabel>
               <InputGroup>
-                <Input type='text' id='image' borderColor={imageUpdated ? 'orange' : 'inherit'} disabled={confirmDelete} defaultValue={albumDetails?.image} onChange={handleChange} />
+                <Input type='text' id='image' borderColor={imageUpdated ? 'orange' : 'inherit'} disabled={confirmDelete} value={albumDetails?.image} onChange={handleChange} />
                 {imageUpdated && <InputRightElement><WarningIcon color='orange' /></InputRightElement>}
               </InputGroup>
             </FormControl>
-            {/* <Input type='submit' display='none' /> */}
+            {/* TODO: <Input type='submit' /> */}
           </form>
         </ModalBody>
         <ModalFooter>
           {!confirmDelete ? (
             <>
+              {/* TODO: work on button spacing */}
               <Button key='delAlbum' variant='ghost' ml='-15px' onClick={() => setConfirmDelete(true)}>Delete Album?</Button>
               <Spacer />
               {/* TODO: on save give user feedback we're working */}

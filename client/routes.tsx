@@ -10,7 +10,6 @@ import NewVinyl from './components/NewVinyl'
 const routes = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Dash />}>
-      {/* <Route index element={<Fruits />} /> */}
       <Route path="add" element={<NewVinyl />} />
     </Route>
   )
