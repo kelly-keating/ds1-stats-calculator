@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "@chakra-ui/icons": "^2.1.0",
+    "@chakra-ui/react": "^2.8.2",
     "@devacademy/eslint-config": "^1.8.0",
     "@reduxjs/toolkit": "^2.2.5",
     "@testing-library/jest-dom": "^5.16.5",

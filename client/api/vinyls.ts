@@ -5,6 +5,7 @@ export const vinylApi = createApi({
   reducerPath: 'vinylApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api/v1/' }),
   tagTypes: ['Vinyls'],
+  
   endpoints: (builder) => ({
     getVinyls: builder.query<Vinyl[], void>({
       query: () => 'vinyls',
@@ -19,10 +20,29 @@ export const vinylApi = createApi({
       }),
       invalidatesTags: ['Vinyls'],
     }),
+
+    updateVinyl: builder.mutation<Vinyl, {id: number, newDetails: Vinyl}>({
+      query: ({id, newDetails}) => ({
+        url: 'vinyls/' + id,
+        method: 'PUT',
+        body: { ...newDetails }
+      }),
+      invalidatesTags: ['Vinyls'],
+    }),
+
+    deleteVinyl: builder.mutation({
+      query: (id) => ({
+        url: 'vinyls/' + id,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Vinyls'],
+    }),
   })
 })
 
 export const {
   useGetVinylsQuery,
   useCreateVinylMutation,
+  useUpdateVinylMutation,
+  useDeleteVinylMutation,
 } = vinylApi

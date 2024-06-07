@@ -1,4 +1,6 @@
 import { Response, Router } from 'express'
+import { Vinyl } from '../../models'
+
 import * as db from '../db/vinyls'
 
 const router = Router()
@@ -35,10 +37,20 @@ router.post('/', (req, res) => {
 // PUT /vinyls/:id
 router.put('/:id', (req, res) => {
   const id = Number(req.params.id)
-  const { image } = req.body
-  db.updateVinyl(id, image)
-    .then((vinyl) => res.json(vinyl))
-    .catch((err) => sendError(res, err))
+  const { artist, title, image } = req.body
+
+  const newDetails: Partial<Vinyl> = {}
+  if (artist) newDetails.artist = artist
+  if (title) newDetails.title = title
+  if (image) newDetails.image = image
+
+  if (!newDetails.artist && !newDetails.title && !newDetails?.image) {
+    sendError(res, Error('No details to update provided'))
+  } else {
+    db.updateVinyl(id, { artist, title, image })
+      .then((vinyl) => res.json(vinyl))
+      .catch((err) => sendError(res, err))
+  }
 })
 
 // DELETE /vinyls/:id

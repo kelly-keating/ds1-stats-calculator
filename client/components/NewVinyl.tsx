@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react"
 import { useCreateVinylMutation } from "../api/vinyls"
+import { Divider } from "@chakra-ui/react"
 
 function NewVinyl() {
   const [createAlbum, { isLoading }] = useCreateVinylMutation()

@@ -1,17 +1,15 @@
+import { Flex } from "@chakra-ui/react"
 import { useGetVinylsQuery } from "../api/vinyls"
+
+import SingleVinyl from "./SingleVinyl"
 
 function Vinyls() {
   const { data: vinyls = [], error, isLoading } = useGetVinylsQuery()
 
   return (
-    <>
-      <h2>Vinyls</h2>
-      <ul>
-        {vinyls.map((album) => (
-          <li key={album.id}>{album.title} by {album.artist}</li>
-        ))}
-      </ul>
-    </>
+    <Flex wrap='wrap' justify='center'>
+      {vinyls.map((album) => <SingleVinyl key={album.id} {...album} />)}
+    </Flex>
   )
 }
 

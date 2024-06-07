@@ -20,10 +20,10 @@ export function addVinyl(newVinyl: Vinyl): Promise<Vinyl> {
     .then(([dbVinyl]) => dbVinyl)
 }
 
-export function updateVinyl(id: number, image: string): Promise<Vinyl> {
+export function updateVinyl(id: number, newDetails: Partial<Vinyl>): Promise<Vinyl> {
   return db('vinyls')
     .where('id', id)
-    .update({ image })
+    .update(newDetails)
     .returning('*')
     .then(([dbVinyl]) => dbVinyl)
 }
