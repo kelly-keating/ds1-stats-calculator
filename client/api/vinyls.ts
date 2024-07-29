@@ -3,7 +3,7 @@ import { Vinyl } from '../../models'
 
 export const vinylApi = createApi({
   reducerPath: 'vinylApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api/v1/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.BASE_URL + 'api/v1/' }),
   tagTypes: ['Vinyls'],
   
   endpoints: (builder) => ({

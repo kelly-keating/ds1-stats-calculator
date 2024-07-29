@@ -1,5 +1,5 @@
 import express from 'express'
-import path from 'path'
+import * as Path from 'node:path'
 
 import fruits from './routes/fruits'
 import vinyls from './routes/vinyls'
@@ -7,7 +7,7 @@ import vinyls from './routes/vinyls'
 const server = express()
 
 server.use(express.json())
-server.use(express.static(path.join(__dirname, 'public')))
+// server.use(express.static(Path.join(__dirname, 'public')))
 
 // Routes
 
@@ -17,6 +17,7 @@ server.use('/api/v1/vinyls', vinyls)
 // Production settings
 
 if (process.env.NODE_ENV === 'production') {
+  server.use(express.static(Path.resolve('public')))
   server.use('/assets', express.static('/app/dist/assets'))
   server.get('*', (req, res) => {
     res.sendFile('/app/dist/index.html')

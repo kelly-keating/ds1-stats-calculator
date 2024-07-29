@@ -1,6 +1,10 @@
-const { join } = require('node:path')
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+const config = {
   development: {
     client: 'sqlite3',
     useNullAsDefault: true,
@@ -41,3 +45,6 @@ module.exports = {
     },
   },
 }
+
+// module.exports = config
+export default config
